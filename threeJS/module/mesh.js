@@ -1,11 +1,25 @@
 import * as THREE from 'three';
+import img from '../assets/textures/uv-test-bw.png'
+function createMaterial() {
+  const textureLoader = new THREE.TextureLoader();
+  // load a texture
+  const texture = textureLoader.load(
+    img,
+  );
+  // create a "standard" material
+  // const material = new THREE.MeshStandardMaterial({ color: 'purple' });
+  const material = new THREE.MeshStandardMaterial({ map: texture });
+
+
+  return material;
+}
 
 function createCube() {
   // create a geometry
   const geometry = new THREE.BoxGeometry(3, 3, 3)
 
   // create a default (white) Basic material
-  const material = new THREE.MeshStandardMaterial({ color: 'purple' });
+  const material = createMaterial();
 
   // create a Mesh containing the geometry and material
   const cube = new THREE.Mesh(geometry, material);

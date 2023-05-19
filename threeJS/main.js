@@ -6,6 +6,7 @@ import { createCube } from "./module/mesh";
 import { createCube2 } from "./module/mesh2";
 import { createRenderer } from "./module/renderer";
 import { createScene } from "./module/scene";
+import { createControls } from "./module/controls";
 
 let camera;
 let renderer;
@@ -17,8 +18,11 @@ class World {
       camera = createCamera();
       scene = createScene();
       renderer = createRenderer();
-      loop = new Loop(camera, scene, renderer)
       container.append(renderer.domElement);
+
+      loop = new Loop(camera, scene, renderer)
+
+      const controls = createControls(camera, renderer.domElement);
 
       const cube = createCube();
       const cube2 = createCube2()
@@ -27,10 +31,12 @@ class World {
       const light = createLights()
       scene.add(cube, light);
 
-      loop.updatables.push(cube);
+      // loop.updatables.push(cube);
+      loop.updatables.push(controls);
 
       const resizer = new Resizer(container, camera, renderer);
    }
+
 
    render() {
       // draw a single frame
