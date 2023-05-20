@@ -28,8 +28,8 @@ class World {
       const cube2 = createCube2()
       cube2.position.set(0, 0, 1)
       cube.add(cube2)
-      const light = createLights()
-      scene.add(cube, light);
+      const { ambientLight, mainLight } = createLights();
+      scene.add(cube, ambientLight, mainLight);
 
       // loop.updatables.push(cube);
       loop.updatables.push(controls);
