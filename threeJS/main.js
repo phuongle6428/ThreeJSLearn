@@ -7,6 +7,7 @@ import { createCube2 } from "./module/mesh2";
 import { createRenderer } from "./module/renderer";
 import { createScene } from "./module/scene";
 import { createControls } from "./module/controls";
+import { createMeshGroup } from "./module/meshGroup";
 
 let camera;
 let renderer;
@@ -29,10 +30,13 @@ class World {
       cube2.position.set(0, 0, 1)
       cube.add(cube2)
       const { ambientLight, mainLight } = createLights();
-      scene.add(cube, ambientLight, mainLight);
+      // scene.add(cube, ambientLight, mainLight);
+      const meshGroup = createMeshGroup();
 
+      scene.add(ambientLight, mainLight, meshGroup);
       // loop.updatables.push(cube);
-      loop.updatables.push(controls);
+      // loop.updatables.push(controls);
+      loop.updatables.push(controls, meshGroup);
 
       const resizer = new Resizer(container, camera, renderer);
    }
